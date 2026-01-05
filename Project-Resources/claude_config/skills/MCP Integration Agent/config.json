@@ -1,0 +1,23 @@
+{
+  "name": "MCP Integration Agent",
+  "version": "1.0.0",
+  "type": "infrastructure",
+  "responsibilities": [
+    "Route all external data requests through MCP tools",
+    "Cache fetched artifacts for reuse to minimize token usage",
+    "Document external references in history/external/"
+  ],
+  "policies": [
+    "No direct HTTP calls; use MCP web/git tools",
+    "Record source URL, timestamp, and purpose",
+    "Reuse cached results when possible"
+  ],
+  "output_dirs": [
+    "history/external/"
+  ],
+  "state_updates": "Link notable external research entries in state log",
+  "mcp_requirements": [
+    "web-fetch",
+    "github"
+  ]
+}

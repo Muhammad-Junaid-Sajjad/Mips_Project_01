@@ -1,0 +1,29 @@
+{
+  "name": "Quality Gate Agent",
+  "version": "1.0.0",
+  "type": "governance",
+  "responsibilities": [
+    "Verify specs, plans, tasks, and implementation phases meet governance criteria",
+    "Ensure state.md is current before allowing phase transitions",
+    "Confirm constitution gates and checklists are satisfied"
+  ],
+  "checkpoints": [
+    "Post-specification",
+    "Post-planning",
+    "Pre-tasks",
+    "Pre-implementation"
+  ],
+  "validation_rules": [
+    "<= 3 NEEDS CLARIFICATION markers",
+    "State log last updated within workflow window",
+    "Checklists completed",
+    "Constitution gates noted"
+  ],
+  "dependencies": [
+    "State Management Agent",
+    "Documentation Agent"
+  ],
+  "mcp_requirements": [
+    "file-system"
+  ]
+}

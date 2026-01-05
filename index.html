@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MIPS Pipeline Simulator - Home</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles-multi-enhanced.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">🔧 Pipeline Simulator</div>
+      <ul class="nav-menu">
+        <li><a href="home.html" class="nav-link active">Home</a></li>
+        <li><a href="pipeline.html" class="nav-link">Pipeline</a></li>
+        <li><a href="statistics.html" class="nav-link">Statistics</a></li>
+        <li><a href="sandbox.html" class="nav-link">Sandbox</a></li>
+        <li><button id="theme-toggle" class="theme-toggle" title="Switch to Dark Mode">🌙</button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section with Glowing Title -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="glowing-title">
+        <span class="glow-text">INTERACTIVE 5-STAGE</span>
+        <br>
+        <span class="glow-text-2">RISC PIPELINE SIMULATOR</span>
+      </h1>
+      <p class="hero-subtitle">Visualize instruction execution through the pipeline with real-time hazard detection</p>
+      <div class="hero-buttons">
+        <a href="pipeline.html" class="btn btn-primary">🚀 Start Simulation</a>
+        <a href="#features" class="btn btn-secondary">📚 Learn More</a>
+      </div>
+    </div>
+    <div class="hero-background">
+      <div class="pipeline-preview">
+        <div class="stage-box">IF</div>
+        <div class="arrow">→</div>
+        <div class="stage-box">ID</div>
+        <div class="arrow">→</div>
+        <div class="stage-box">EX</div>
+        <div class="arrow">→</div>
+        <div class="stage-box">MEM</div>
+        <div class="arrow">→</div>
+        <div class="stage-box">WB</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="features">
+    <h2>Key Features</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🔬</div>
+        <h3>Pipeline Simulation</h3>
+        <p>Real-time 5-stage pipeline visualization with cycle-by-cycle execution</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚠️</div>
+        <h3>Hazard Detection</h3>
+        <p>Automatic detection of RAW, Control hazards with forwarding analysis</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Performance Metrics</h3>
+        <p>Track CPI, speedup, stalls, and detailed performance analysis</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⌨️</div>
+        <h3>Code Sandbox</h3>
+        <p>Write custom MIPS programs and run them live in the simulator</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📤</div>
+        <h3>Export Results</h3>
+        <p>Export execution logs as JSON, CSV, or generate professional reports</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">✨</div>
+        <h3>Interactive UI</h3>
+        <p>Smooth animations, responsive design, and excellent user experience</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Project Overview Section -->
+  <section class="overview">
+    <h2>Project Overview</h2>
+    <div class="overview-content">
+      <div class="overview-left">
+        <h3>What is Pipeline Simulation?</h3>
+        <p>
+          A pipeline is a technique used in microprocessors to execute instructions faster by dividing the instruction execution process into multiple stages. Instead of executing one instruction completely before starting the next, a pipeline allows multiple instructions to be processed simultaneously at different stages.
+        </p>
+        <p>
+          This simulator demonstrates the classic 5-stage RISC pipeline with:
+        </p>
+        <ul class="overview-list">
+          <li><strong>IF (Instruction Fetch):</strong> Fetch instruction from memory</li>
+          <li><strong>ID (Instruction Decode):</strong> Decode instruction and read registers</li>
+          <li><strong>EX (Execute):</strong> Perform arithmetic/logic operations</li>
+          <li><strong>MEM (Memory Access):</strong> Read/write data from memory</li>
+          <li><strong>WB (Write Back):</strong> Write results back to registers</li>
+        </ul>
+      </div>
+      <div class="overview-right">
+        <h3>Why Pipeline Hazards Matter?</h3>
+        <p>
+          Pipeline hazards are situations where the next instruction cannot execute in its designated clock cycle. There are three types:
+        </p>
+        <ul class="overview-list">
+          <li><strong>Data Hazards (RAW):</strong> When instruction depends on data from previous instruction</li>
+          <li><strong>Control Hazards:</strong> Branch instructions change program counter, causing pipeline flush</li>
+          <li><strong>Structural Hazards:</strong> When hardware resources are insufficient</li>
+        </ul>
+        <p>
+          This simulator helps visualize these hazards and demonstrates solutions like forwarding and stalling.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Architecture Section -->
+  <section class="architecture">
+    <h2>System Architecture</h2>
+    <div class="architecture-grid">
+      <div class="arch-item">
+        <h4>Frontend</h4>
+        <p>HTML5 + CSS3 + ES6 JavaScript</p>
+        <p class="arch-detail">Responsive design, smooth animations, interactive controls</p>
+      </div>
+      <div class="arch-item">
+        <h4>Simulation Engine</h4>
+        <p>Pure JavaScript Implementation</p>
+        <p class="arch-detail">Modular, state-machine based, 5-stage pipeline logic</p>
+      </div>
+      <div class="arch-item">
+        <h4>Hazard Detection</h4>
+        <p>Automated Analysis</p>
+        <p class="arch-detail">RAW/Control hazard detection, forwarding capability analysis</p>
+      </div>
+      <div class="arch-item">
+        <h4>Performance Analysis</h4>
+        <p>Real-time Metrics</p>
+        <p class="arch-detail">CPI calculation, speedup comparison, detailed statistics</p>
+      </div>
+      <div class="arch-item">
+        <h4>Data Export</h4>
+        <p>Multiple Formats</p>
+        <p class="arch-detail">JSON, CSV, HTML reports with execution logs</p>
+      </div>
+      <div class="arch-item">
+        <h4>User Customization</h4>
+        <p>Code Sandbox</p>
+        <p class="arch-detail">Write custom MIPS instructions, instant execution</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Example Programs Section -->
+  <section class="examples">
+    <h2>Example Programs</h2>
+    <div class="examples-grid">
+      <div class="example-card">
+        <h4>Basic Arithmetic</h4>
+        <pre><code>ADD R3, R1, R2
+SUB R5, R3, R4
+AND R6, R5, R7</code></pre>
+      </div>
+      <div class="example-card">
+        <h4>With Data Hazard</h4>
+        <pre><code>ADD R3, R1, R2
+SUB R5, R3, R4    ;RAW on R3
+LW R6, 0(R5)</code></pre>
+      </div>
+      <div class="example-card">
+        <h4>With Control Hazard</h4>
+        <pre><code>ADD R3, R1, R2
+LW R4, 0(R3)
+BEQ R4, R5, LOOP</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statistics Preview -->
+  <section class="stats-preview">
+    <h2>Performance Comparison</h2>
+    <div class="comparison-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>Non-Pipelined</th>
+            <th>Pipelined</th>
+            <th>Improvement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>CPI</strong></td>
+            <td>5.00</td>
+            <td>~1.2-2.0</td>
+            <td>2.5-4.2x faster</td>
+          </tr>
+          <tr>
+            <td><strong>6 Instructions</strong></td>
+            <td>30 cycles</td>
+            <td>10 cycles</td>
+            <td>3x speedup</td>
+          </tr>
+          <tr>
+            <td><strong>Throughput</strong></td>
+            <td>1 instr/5 cycles</td>
+            <td>1 instr/cycle (ideal)</td>
+            <td>5x improvement</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Getting Started Section -->
+  <section class="getting-started">
+    <h2>Getting Started</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h4>Visit Pipeline Page</h4>
+        <p>Click the "Pipeline" button in the navigation menu to view the simulator</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h4>Click Start</h4>
+        <p>Press the "Start" button to begin the simulation with preloaded instructions</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h4>Watch Execution</h4>
+        <p>Observe instructions flowing through 5 pipeline stages with hazard highlighting</p>
+      </div>
+      <div class="step">
+        <div class="step-number">4</div>
+        <h4>View Statistics</h4>
+        <p>Go to "Statistics" page to see detailed performance metrics and analysis</p>
+      </div>
+      <div class="step">
+        <div class="step-number">5</div>
+        <h4>Try Custom Code</h4>
+        <p>Use "Sandbox" to write and test your own MIPS programs</p>
+      </div>
+      <div class="step">
+        <div class="step-number">6</div>
+        <h4>Export Results</h4>
+        <p>Export your execution logs and generate professional reports</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technology Stack -->
+  <section class="tech-stack">
+    <h2>Technology Stack</h2>
+    <div class="tech-grid">
+      <div class="tech-item">
+        <h4>🎨 Frontend</h4>
+        <ul>
+          <li>HTML5 Semantic</li>
+          <li>CSS3 Grid & Flexbox</li>
+          <li>Responsive Design</li>
+        </ul>
+      </div>
+      <div class="tech-item">
+        <h4>⚙️ Engine</h4>
+        <ul>
+          <li>ES6 JavaScript</li>
+          <li>State Machine</li>
+          <li>Modular Architecture</li>
+        </ul>
+      </div>
+      <div class="tech-item">
+        <h4>📊 Analysis</h4>
+        <ul>
+          <li>Real-time Metrics</li>
+          <li>Hazard Detection</li>
+          <li>CPI Calculation</li>
+        </ul>
+      </div>
+      <div class="tech-item">
+        <h4>📤 Export</h4>
+        <ul>
+          <li>JSON Format</li>
+          <li>CSV Tables</li>
+          <li>HTML Reports</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2026 Interactive RISC Pipeline Simulator | Educational Project</p>
+      <p>Built with ❤️ for learning computer architecture and pipeline concepts</p>
+    </div>
+  </footer>
+
+  <script src="navigation.js"></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+{
+  "name": "Architecture Agent",
+  "version": "1.0.0",
+  "type": "workflow",
+  "command_alias": "/sp.plan",
+  "responsibilities": [
+    "Conduct Phase 0 research to resolve open questions",
+    "Produce Phase 1 design artifacts (plan.md, data models, contracts)",
+    "Validate designs against constitution gates and recommend ADRs"
+  ],
+  "dependencies": [
+    "State Management Agent",
+    "Spec Agent"
+  ],
+  "phase_structure": [
+    "Phase 0 - Research",
+    "Phase 1 - Design"
+  ],
+  "output_files": [
+    "specs/<feature>/plan.md",
+    "specs/<feature>/research.md",
+    "specs/<feature>/data-model.md",
+    "specs/<feature>/contracts/"
+  ],
+  "adr_trigger_rule": "Create ADR suggestion when decisions impact architecture, have alternatives, and affect multiple components",
+  "state_updates": "Record phase completion and ADR suggestions in state log",
+  "mcp_requirements": [
+    "file-system"
+  ]
+}

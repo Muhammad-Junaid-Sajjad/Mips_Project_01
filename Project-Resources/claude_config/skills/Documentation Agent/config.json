@@ -1,0 +1,30 @@
+{
+  "name": "Documentation Agent",
+  "version": "1.0.0",
+  "type": "infrastructure",
+  "responsibilities": [
+    "Maintain governance documents under specs/",
+    "Keep CLAUDE.md and agent.md synced with current rules",
+    "Ensure references to state.md and skills stay accurate"
+  ],
+  "governance_files": [
+    "specs/specify.md",
+    "specs/plan.md",
+    "specs/tasks.md",
+    "specs/implement.md",
+    "CLAUDE.md",
+    ".claude/agent.md"
+  ],
+  "dependencies": [
+    "State Management Agent"
+  ],
+  "update_triggers": [
+    "New agent added",
+    "Governance rule change",
+    "Constitution amendment"
+  ],
+  "mcp_requirements": [
+    "file-system"
+  ]
+}
+}

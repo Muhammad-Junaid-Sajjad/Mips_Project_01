@@ -1,0 +1,27 @@
+{
+  "name": "State Management Agent",
+  "version": "1.0.0",
+  "type": "infrastructure",
+  "responsibilities": [
+    "Maintain hybrid project state log with summaries + references",
+    "Record milestone decisions and link to PHR/ADR files",
+    "Expose current workflow, blockers, and progress",
+    "Ensure contributors consult up-to-date context before tasks"
+  ],
+  "state_file": ".claude/skills/State Management/state.md",
+  "update_triggers": [
+    "After PHR creation",
+    "After ADR ratification",
+    "After phase transitions (spec, plan, tasks, implement)",
+    "When blockers or statuses change"
+  ],
+  "dependencies": [
+    "history/prompts",
+    "history/adr",
+    ".specify/memory/constitution.md"
+  ],
+  "mcp_requirements": [
+    "file-system"
+  ],
+  "notes": "Always update the state log immediately after documenting decisions so the project history stays token-efficient."
+}

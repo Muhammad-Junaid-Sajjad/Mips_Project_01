@@ -1,0 +1,29 @@
+{
+  "name": "Task Execution Agent",
+  "version": "1.0.0",
+  "type": "workflow",
+  "command_alias": "/sp.tasks",
+  "responsibilities": [
+    "Decompose plans into executable tasks across setup/tests/core/integration/polish phases",
+    "Define dependencies, file scopes, and test coverage per task",
+    "Synchronize task readiness with state log"
+  ],
+  "dependencies": [
+    "State Management Agent",
+    "Architecture Agent",
+    "Quality Gate Agent"
+  ],
+  "output_files": [
+    "specs/<feature>/tasks.md",
+    "specs/<feature>/checklists/implementation.md"
+  ],
+  "rules": [
+    "Tests tasks precede implementation tasks",
+    "Parallel tasks tagged with [P]",
+    "Each task references plan sections"
+  ],
+  "state_updates": "Log tasks ready milestone with PHR link",
+  "mcp_requirements": [
+    "file-system"
+  ]
+}

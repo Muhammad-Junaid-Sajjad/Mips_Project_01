@@ -1,0 +1,34 @@
+{
+  "name": "Spec Agent",
+  "version": "1.0.0",
+  "type": "workflow",
+  "command_alias": "/sp.specify",
+  "responsibilities": [
+    "Translate user intent into structured feature specifications",
+    "Ensure specs comply with specification governance and constitution",
+    "Link resulting specs to PHRs and update state log"
+  ],
+  "dependencies": [
+    "State Management Agent"
+  ],
+  "required_sections": [
+    "Metadata",
+    "User Scenarios",
+    "Edge Cases",
+    "Functional Requirements",
+    "Success Criteria"
+  ],
+  "constitution_gates": [
+    "Simplicity-first slices",
+    "Static-host friendly requirements",
+    "Deterministic behavior"
+  ],
+  "output_files": [
+    "specs/<feature>/spec.md",
+    "specs/<feature>/checklists/requirements.md"
+  ],
+  "state_updates": "Log spec completion with summary + PHR link",
+  "mcp_requirements": [
+    "file-system"
+  ]
+}
