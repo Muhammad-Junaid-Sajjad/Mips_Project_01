@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MIPS Pipeline Simulator - Overview</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles-multi-enhanced.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">🔄 MIPS Pipeline</div>
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="simulator.html" class="nav-link">Simulator</a></li>
+        <li><a href="overview.html" class="nav-link active">Overview</a></li>
+        <li><button id="theme-toggle" class="theme-toggle" title="Switch to Light Mode">🌙</button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="pipeline-container">
+    <header class="text-center" style="margin-bottom: 40px;">
+      <h1 class="glowing-title">MIPS Pipeline Overview</h1>
+      <p class="subtitle">Understanding 5-Stage RISC Architecture & Hazards</p>
+    </header>
+
+    <div class="features-grid">
+      <div class="feature-card fade-in">
+        <div class="feature-icon">🔄</div>
+        <h3 class="feature-title">Project Purpose</h3>
+        <p class="feature-description">This interactive simulator is designed for BSCS 5th-semester students to visualize the complexity of 5-stage RISC processor pipelines in real-time. It bridges the gap between theoretical architecture and practical implementation through stunning visualizations and real-time feedback.</p>
+      </div>
+
+      <div class="feature-card slide-in">
+        <div class="feature-icon">🏗️</div>
+        <h3 class="feature-title">5-Stage Architecture</h3>
+        <p class="feature-description">The pipeline consists of five distinct stages that work in parallel to execute instructions efficiently:</p>
+        <div class="stage-breakdown" style="margin-top: 15px;">
+          <div class="stage-item" style="padding: 10px; margin: 8px 0; background: rgba(0, 217, 255, 0.05); border-radius: 8px; border-left: 3px solid var(--stage-if);">
+            <strong>IF (Instruction Fetch)</strong>: Fetch from memory & increment PC
+          </div>
+          <div class="stage-item" style="padding: 10px; margin: 8px 0; background: rgba(139, 92, 246, 0.05); border-radius: 8px; border-left: 3px solid var(--stage-id);">
+            <strong>ID (Instruction Decode)</strong>: Read registers & set control signals
+          </div>
+          <div class="stage-item" style="padding: 10px; margin: 8px 0; background: rgba(255, 0, 110, 0.05); border-radius: 8px; border-left: 3px solid var(--stage-ex);">
+            <strong>EX (Execute)</strong>: Perform ALU operation
+          </div>
+          <div class="stage-item" style="padding: 10px; margin: 8px 0; background: rgba(255, 165, 0, 0.05); border-radius: 8px; border-left: 3px solid var(--stage-mem);">
+            <strong>MEM (Memory Access)</strong>: Data read/write from memory
+          </div>
+          <div class="stage-item" style="padding: 10px; margin: 8px 0; background: rgba(0, 255, 68, 0.05); border-radius: 8px; border-left: 3px solid var(--stage-wb);">
+            <strong>WB (Write Back)</strong>: Update register file
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-card slide-in">
+        <div class="feature-icon">⚠️</div>
+        <h3 class="feature-title">Hazard Management</h3>
+        <p class="feature-description">The simulator detects and visualizes pipeline hazards that can affect performance:</p>
+        <ul style="margin-top: 15px; text-align: left;">
+          <li style="margin: 10px 0; padding-left: 20px; position: relative;">
+            <span style="position: absolute; left: 0; color: var(--accent);">🔴</span>
+            <strong>RAW Hazards</strong>: Read-After-Write dependencies resolved via stalls with visual indicators
+          </li>
+          <li style="margin: 10px 0; padding-left: 20px; position: relative;">
+            <span style="position: absolute; left: 0; color: var(--warning);">🟡</span>
+            <strong>Control Hazards</strong>: Branch prediction challenges visualized during conditional branches
+          </li>
+          <li style="margin: 10px 0; padding-left: 20px; position: relative;">
+            <span style="position: absolute; left: 0; color: var(--primary);">🔵</span>
+            <strong>Structural Hazards</strong>: Resource conflicts between pipeline stages
+          </li>
+        </ul>
+      </div>
+
+      <div class="feature-card fade-in">
+        <div class="feature-icon">📊</div>
+        <h3 class="feature-title">Performance Metrics</h3>
+        <p class="feature-description">Real-time performance analysis to understand pipeline efficiency:</p>
+        <div class="metrics-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 15px;">
+          <div style="background: rgba(0, 217, 255, 0.1); padding: 12px; border-radius: 8px; text-align: center;">
+            <div style="font-size: 1.5rem; font-weight: bold; color: var(--primary);">CPI</div>
+            <div style="font-size: 0.8rem; color: var(--text-tertiary);">Cycles Per Instruction</div>
+          </div>
+          <div style="background: rgba(255, 0, 110, 0.1); padding: 12px; border-radius: 8px; text-align: center;">
+            <div style="font-size: 1.5rem; font-weight: bold; color: var(--accent);">Speedup</div>
+            <div style="font-size: 0.8rem; color: var(--text-tertiary);">Performance Gain</div>
+          </div>
+          <div style="background: rgba(0, 255, 68, 0.1); padding: 12px; border-radius: 8px; text-align: center;">
+            <div style="font-size: 1.5rem; font-weight: bold; color: var(--success);">Stalls</div>
+            <div style="font-size: 0.8rem; color: var(--text-tertiary);">Pipeline Bubbles</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-card slide-in">
+        <div class="feature-icon">🎯</div>
+        <h3 class="feature-title">Educational Value</h3>
+        <p class="feature-description">Designed specifically for computer architecture education:</p>
+        <ul style="margin-top: 15px; text-align: left;">
+          <li style="margin: 8px 0;">Visual understanding of abstract pipeline concepts</li>
+          <li style="margin: 8px 0;">Real-time hazard detection and resolution</li>
+          <li style="margin: 8px 0;">Performance impact visualization</li>
+          <li style="margin: 8px 0;">Interactive learning through simulation</li>
+          <li style="margin: 8px 0;">Professional-grade interface for academic use</li>
+        </ul>
+      </div>
+
+      <div class="feature-card fade-in">
+        <div class="feature-icon">⚙️</div>
+        <h3 class="feature-title">Technical Implementation</h3>
+        <p class="feature-description">Built with modern web technologies for optimal performance:</p>
+        <div style="margin-top: 15px; font-family: monospace; font-size: 0.9rem; line-height: 1.6; background: rgba(0, 0, 0, 0.2); padding: 15px; border-radius: 8px;">
+          • HTML5 + CSS3 + JavaScript (ES6)<br>
+          • Real-time pipeline simulation engine<br>
+          • Dynamic hazard detection algorithms<br>
+          • Responsive design for all devices<br>
+          • Performance-optimized rendering<br>
+          • Interactive visualization system
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 40px; text-align: center;">
+      <h2 style="margin-bottom: 20px;">Pipeline Visualization</h2>
+      <div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 10px; margin: 20px 0;">
+        <div style="background: var(--card-bg); padding: 15px; border-radius: 10px; min-width: 80px; border: 2px solid var(--stage-if);">
+          <div style="color: var(--stage-if); font-weight: bold; margin-bottom: 5px;">IF</div>
+          <div style="font-size: 0.8rem; color: var(--text-tertiary);">Fetch</div>
+        </div>
+        <div style="font-size: 1.5rem; color: var(--text-tertiary);">→</div>
+        <div style="background: var(--card-bg); padding: 15px; border-radius: 10px; min-width: 80px; border: 2px solid var(--stage-id);">
+          <div style="color: var(--stage-id); font-weight: bold; margin-bottom: 5px;">ID</div>
+          <div style="font-size: 0.8rem; color: var(--text-tertiary);">Decode</div>
+        </div>
+        <div style="font-size: 1.5rem; color: var(--text-tertiary);">→</div>
+        <div style="background: var(--card-bg); padding: 15px; border-radius: 10px; min-width: 80px; border: 2px solid var(--stage-ex);">
+          <div style="color: var(--stage-ex); font-weight: bold; margin-bottom: 5px;">EX</div>
+          <div style="font-size: 0.8rem; color: var(--text-tertiary);">Execute</div>
+        </div>
+        <div style="font-size: 1.5rem; color: var(--text-tertiary);">→</div>
+        <div style="background: var(--card-bg); padding: 15px; border-radius: 10px; min-width: 80px; border: 2px solid var(--stage-mem);">
+          <div style="color: var(--stage-mem); font-weight: bold; margin-bottom: 5px;">MEM</div>
+          <div style="font-size: 0.8rem; color: var(--text-tertiary);">Memory</div>
+        </div>
+        <div style="font-size: 1.5rem; color: var(--text-tertiary);">→</div>
+        <div style="background: var(--card-bg); padding: 15px; border-radius: 10px; min-width: 80px; border: 2px solid var(--stage-wb);">
+          <div style="color: var(--stage-wb); font-weight: bold; margin-bottom: 5px;">WB</div>
+          <div style="font-size: 0.8rem; color: var(--text-tertiary);">Write</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>© 2026 MIPS Pipeline Simulator | Premium Educational Resource</p>
+  </footer>
+
+  <script src="navigation.js"></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+{
+    "liveServer.settings.donotShowInfoMsg": true,
+    "liveServer.settings.donotVerifyTags": true,
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact"
+    },
+    "files.associations": {
+        "*.html": "html"
+    },
+    "html.suggest.html5": true,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "prettier.singleQuote": true,
+    "prettier.trailingComma": "es5",
+    "debug.javascript.autoAttachFilter": "disabled",
+    "debug.chrome.useV3": false,
+    "liveServer.settings.port": 5500,
+    "liveServer.settings.root": "/",
+    "liveServer.globalSettings.donotShowInfoMsg": true,
+    "extensions.ignoreRecommendations": false,
+    "telemetry.enableTelemetry": false,
+    "security.workspace.trust.untrustedFiles": "open",
+    "workbench.colorTheme": "Default Dark+",
+    "workbench.iconTheme": "vscode-icons",
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "files.autoSave": "onFocusChange",
+    "workbench.startupEditor": "newUntitledFile",
+    "terminal.integrated.shell.linux": "/bin/bash"
+}

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MIPS Pipeline Simulator - Simulator</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles-multi-enhanced.css">
+  <style>
+    .pipeline-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    /* Enhanced Stage Boxes with Beautiful Visuals */
+    .stage-box {
+      flex: 1;
+      background: linear-gradient(135deg, var(--card-bg) 0%, var(--bg-lighter) 100%);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 25px 15px;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      min-height: 120px;
+    }
+
+    .stage-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at center, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: 1;
+    }
+
+    .stage-box:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .stage-box:hover::before {
+      opacity: 1;
+    }
+
+    .stage-title {
+      font-size: 1.4rem;
+      font-weight: 900;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .stage-title::after {
+      content: '';
+      display: block;
+      width: 60%;
+      height: 3px;
+      margin: 8px auto 0;
+      border-radius: 2px;
+    }
+
+    /* Stage-specific colors and effects */
+    .stage-if .stage-title { color: var(--stage-if); }
+    .stage-if .stage-title::after { background: linear-gradient(90deg, var(--stage-if), transparent); box-shadow: 0 0 10px var(--stage-if); }
+    .stage-id .stage-title { color: var(--stage-id); }
+    .stage-id .stage-title::after { background: linear-gradient(90deg, var(--stage-id), transparent); box-shadow: 0 0 10px var(--stage-id); }
+    .stage-ex .stage-title { color: var(--stage-ex); }
+    .stage-ex .stage-title::after { background: linear-gradient(90deg, var(--stage-ex), transparent); box-shadow: 0 0 10px var(--stage-ex); }
+    .stage-mem .stage-title { color: var(--stage-mem); }
+    .stage-mem .stage-title::after { background: linear-gradient(90deg, var(--stage-mem), transparent); box-shadow: 0 0 10px var(--stage-mem); }
+    .stage-wb .stage-title { color: var(--stage-wb); }
+    .stage-wb .stage-title::after { background: linear-gradient(90deg, var(--stage-wb), transparent); box-shadow: 0 0 10px var(--stage-wb); }
+
+    /* Enhanced Instruction Display */
+    .stage-instruction {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 12px;
+      border-radius: 8px;
+      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+      font-weight: bold;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 2;
+      border: 1px solid transparent;
+      backdrop-filter: blur(10px);
+    }
+
+    .stage-instruction::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 8px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .stage-instruction:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+
+    .stage-instruction:hover::before {
+      opacity: 1;
+    }
+
+    .stage-instruction.hazard-raw {
+      border-color: var(--accent);
+      background: rgba(255, 0, 110, 0.15);
+      box-shadow: 0 0 15px rgba(255, 0, 110, 0.3);
+      animation: pulse-glow 2s infinite;
+    }
+
+    .stage-instruction.stalled {
+      border-color: var(--warning);
+      background: rgba(255, 165, 0, 0.15);
+      box-shadow: 0 0 15px rgba(255, 165, 0, 0.3);
+      animation: pulse-warning 1.5s infinite;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 15px rgba(255, 0, 110, 0.3); }
+      50% { box-shadow: 0 0 25px rgba(255, 0, 110, 0.6); }
+    }
+
+    @keyframes pulse-warning {
+      0%, 100% { box-shadow: 0 0 15px rgba(255, 165, 0, 0.3); }
+      50% { box-shadow: 0 0 25px rgba(255, 165, 0, 0.6); }
+    }
+
+    /* Beautiful Arrows with Animation */
+    .pipeline-diagram {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 60px 0;
+      gap: 5px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .arrow {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: var(--text-tertiary);
+      position: relative;
+      animation: arrow-pulse 2s infinite;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+      min-width: 40px;
+      text-align: center;
+    }
+
+    .arrow::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: -20px;
+      right: -20px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+      transform: translateY(-50%);
+      z-index: -1;
+    }
+
+    @keyframes arrow-pulse {
+      0%, 100% { transform: scale(1); opacity: 0.7; }
+      50% { transform: scale(1.2); opacity: 1; }
+    }
+
+    /* Enhanced Stats Panel */
+    .stats-panel {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+      margin-bottom: 50px;
+      padding: 20px;
+      background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-lighter) 100%);
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, var(--card-bg) 0%, rgba(255, 255, 255, 0.05) 100%);
+      padding: 25px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      text-align: center;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at center, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
+      z-index: -1;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+      border-color: var(--primary);
+    }
+
+    .stat-val {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+      text-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
+    }
+
+    .stat-lab {
+      font-size: 0.85rem;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+
+    /* Enhanced Timeline Table */
+    .card {
+      background: linear-gradient(135deg, var(--card-bg) 0%, var(--bg-lighter) 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 30px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    #pipeline-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 2px;
+      background: transparent;
+    }
+
+    #pipeline-table th {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: var(--bg);
+      padding: 15px;
+      text-align: center;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.8rem;
+      position: sticky;
+      top: 0;
+    }
+
+    #pipeline-table td {
+      padding: 12px;
+      text-align: center;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    #pipeline-table tbody tr:hover {
+      background: rgba(0, 217, 255, 0.05);
+    }
+
+    #pipeline-table tbody tr:hover td {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(0, 217, 255, 0.2);
+    }
+
+    /* Stage-specific styling in timeline */
+    .stage-if { background: rgba(0, 217, 255, 0.1); color: var(--stage-if); }
+    .stage-id { background: rgba(139, 92, 246, 0.1); color: var(--stage-id); }
+    .stage-ex { background: rgba(255, 0, 110, 0.1); color: var(--stage-ex); }
+    .stage-mem { background: rgba(255, 165, 0, 0.1); color: var(--stage-mem); }
+    .stage-wb { background: rgba(0, 255, 68, 0.1); color: var(--stage-wb); }
+
+    /* Enhanced Control Buttons */
+    .btn {
+      padding: 15px 35px;
+      border: 2px solid;
+      border-radius: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-size: 1rem;
+      position: relative;
+      overflow: hidden;
+      margin: 0 10px;
+      min-width: 120px;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s ease;
+      z-index: -1;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border-color: var(--primary);
+      color: var(--bg);
+      box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 0 40px rgba(0, 217, 255, 0.8);
+      transform: translateY(-3px) scale(1.05);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border-color: var(--text-secondary);
+      color: var(--text);
+      box-shadow: 0 0 15px rgba(224, 224, 255, 0.3);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(0, 217, 255, 0.1);
+      border-color: var(--primary);
+      color: var(--primary);
+      box-shadow: 0 0 30px rgba(0, 217, 255, 0.6);
+    }
+
+    .btn-accent {
+      background: linear-gradient(135deg, var(--accent), #ff4d8f);
+      border-color: var(--accent);
+      color: white;
+      box-shadow: 0 0 20px rgba(255, 0, 110, 0.4);
+    }
+
+    .btn-accent:hover {
+      box-shadow: 0 0 40px rgba(255, 0, 110, 0.8);
+      transform: translateY(-3px) scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">🔄 MIPS Pipeline</div>
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="simulator.html" class="nav-link active">Simulator</a></li>
+        <li><a href="overview.html" class="nav-link">Overview</a></li>
+        <li><button id="theme-toggle" class="theme-toggle" title="Switch to Light Mode">🌙</button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="pipeline-container">
+    <header class="text-center" style="margin-bottom: 40px;">
+      <h1 class="glowing-title">5-Stage Pipeline Simulator</h1>
+      <p class="subtitle">Instruction Fetch → Decode → Execute → Memory → Write-Back</p>
+    </header>
+
+    <div class="stats-panel">
+      <div class="stat-card"><div class="stat-val" id="cycleText">0</div><div class="stat-lab">Current Cycle</div></div>
+      <div class="stat-card"><div class="stat-val" id="cpi-pipelined">-</div><div class="stat-lab">CPI (Pipelined)</div></div>
+      <div class="stat-card"><div class="stat-val" id="stall-count">0</div><div class="stat-lab">Total Stalls</div></div>
+      <div class="stat-card"><div class="stat-val" id="statusText">IDLE</div><div class="stat-lab">Status</div></div>
+    </div>
+
+    <section class="card" style="margin-bottom: 40px;">
+      <div class="text-center" style="margin-bottom: 20px;">
+        <button id="startBtn" class="btn btn-primary">▶ Start</button>
+        <button id="stepBtn" class="btn btn-secondary">⏭ Step</button>
+        <button id="resetBtn" class="btn btn-accent">↻ Reset</button>
+      </div>
+
+      <div class="pipeline-diagram">
+        <div class="stage-box stage-if"><div class="stage-title">IF</div><div id="stage-IF" class="stage-instruction"></div></div>
+        <div class="arrow">→</div>
+        <div class="stage-box stage-id"><div class="stage-title">ID</div><div id="stage-ID" class="stage-instruction"></div></div>
+        <div class="arrow">→</div>
+        <div class="stage-box stage-ex"><div class="stage-title">EX</div><div id="stage-EX" class="stage-instruction"></div></div>
+        <div class="arrow">→</div>
+        <div class="stage-box stage-mem"><div class="stage-title">MEM</div><div id="stage-MEM" class="stage-instruction"></div></div>
+        <div class="arrow">→</div>
+        <div class="stage-box stage-wb"><div class="stage-title">WB</div><div id="stage-WB" class="stage-instruction"></div></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Pipeline Timeline</h2>
+      <div style="overflow-x: auto; margin-top: 20px;">
+        <table id="pipeline-table">
+          <thead>
+            <tr>
+              <th style="text-align: left;">Instruction</th>
+              <th>C1</th><th>C2</th><th>C3</th><th>C4</th><th>C5</th><th>C6</th><th>C7</th><th>C8</th><th>C9</th><th>C10</th>
+            </tr>
+          </thead>
+          <tbody id="pipeline-table-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <footer class="footer">
+    <p>© 2026 MIPS Pipeline Simulator | Interactive Education</p>
+  </footer>
+
+  <script type="module" src="pipeline-simulator.js"></script>
+</body>
+</html>
