@@ -37,10 +37,10 @@ This project presents an interactive 5-stage pipelined RISC processor simulation
 ## 6️⃣ Introduction
 
 ### Background / Context
-Modern computer processors utilize pipeline techniques to improve performance by overlapping the execution of multiple instructions. Understanding pipeline concepts is crucial for computer science and engineering students studying computer architecture. The 5-stage RISC pipeline is a fundamental concept that demonstrates instruction-level parallelism.
+Modern computer processors utilize pipeline techniques to improve performance by overlapping the execution of multiple instructions. Understanding pipeline concepts is crucial for computer science and engineering students studying computer architecture. The 5-stage RISC pipeline is a fundamental concept that demonstrates instruction-level parallelism. This enhanced project now features a comprehensive 4-page architecture with dynamic visualizations and interactive learning tools.
 
 ### Problem Statement
-Students often struggle to visualize how instructions flow through different pipeline stages and how hazards affect performance. Traditional teaching methods rely on static diagrams and theoretical explanations, which can be difficult to comprehend.
+Students often struggle to visualize how instructions flow through different pipeline stages and how hazards affect performance. Traditional teaching methods rely on static diagrams and theoretical explanations, which can be difficult to comprehend. The enhanced solution now provides multiple interactive interfaces to address different learning preferences and requirements.
 
 ### Scope of the Project
 This project provides an interactive web-based simulation of a 5-stage RISC pipeline processor with:
@@ -48,11 +48,15 @@ This project provides an interactive web-based simulation of a 5-stage RISC pipe
 - Hazard detection and visualization
 - Performance metrics calculation
 - Educational documentation and examples
+- Dynamic VS Code screen simulation for immersive learning
+- Custom MIPS code input for personalized experimentation
+- Comprehensive hazard detection and correction analysis
+- Mobile-responsive design for accessibility
 
 ## 7️⃣ Objectives
 
 ### General Objective
-To develop an interactive web-based simulation of a 5-stage RISC pipeline processor that enables students to visualize and understand pipeline concepts and hazards.
+To develop an interactive web-based simulation of a 5-stage RISC pipeline processor that enables students to visualize and understand pipeline concepts and hazards through a comprehensive 4-page interface with dynamic visualizations and personalized learning tools.
 
 ### Specific Objectives
 1. Implement a 5-stage pipeline visualization (IF, ID, EX, MEM, WB)
@@ -60,6 +64,11 @@ To develop an interactive web-based simulation of a 5-stage RISC pipeline proces
 3. Create an intuitive user interface for interactive learning
 4. Calculate and display performance metrics (CPI, speedup)
 5. Provide comprehensive educational documentation
+6. Implement dynamic VS Code screen simulation for immersive learning
+7. Add custom MIPS code input functionality for personalized experimentation
+8. Create comprehensive hazard detection and correction analysis page
+9. Develop mobile-responsive design for accessibility across devices
+10. Integrate consistent navigation and control systems across all pages
 
 ## 8️⃣ Literature Review / Related Work
 
@@ -72,21 +81,35 @@ Previous work in computer architecture education has shown that visual learning 
 [User Interface] → [Simulation Engine] → [Pipeline Visualization] → [Performance Analytics]
        ↓
 [Instruction Parser] → [Hazard Detector] → [Stage Controller]
+       ↓
+[VS Code Screen] → [Code Input System] → [Custom Program Loader]
+       ↓
+[Hazard Analysis Page] → [Correction Techniques] → [Visualization System]
 ```
+
+### Enhanced 4-Page Architecture
+- **Home Page (`index.html`)**: Dynamic VS Code screen simulation with typing animation and collapsible modules
+- **Simulator Page (`simulator.html`)**: Pipeline visualization with custom MIPS code input
+- **Hazard Page (`hazard.html`)**: Comprehensive hazard detection and correction analysis
+- **Overview Page (`overview.html`)**: Detailed project documentation and concepts
 
 ### Technologies Used
 - **HTML5**: Semantic markup and structure
 - **CSS3**: Advanced styling with animations and responsive design
 - **JavaScript (ES6)**: Core simulation logic and DOM manipulation
 - **Vanilla JavaScript**: No frameworks required for simplicity
+- **Web Animations API**: Hardware-accelerated animations
+- **Responsive Design**: Mobile-first approach with accessibility features
 
 ### Data Flow
-1. User inputs MIPS instructions or selects predefined examples
-2. Instructions are parsed and loaded into the pipeline
-3. Simulation engine advances through pipeline stages
+1. User inputs MIPS instructions via custom code input or selects predefined examples
+2. Instructions are parsed by the MIPS parser and loaded into the pipeline
+3. Simulation engine advances through pipeline stages with hazard detection
 4. Hazard detection runs in parallel with pipeline execution
-5. Visualization updates in real-time
+5. Visualization updates in real-time with dynamic effects
 6. Performance metrics are calculated and displayed
+7. Custom VS Code screen provides immersive learning experience
+8. Hazard analysis page offers comprehensive correction techniques
 
 ## 10️⃣ Implementation
 
@@ -96,18 +119,19 @@ The project is a static web application requiring no build tools or special setu
 2. Navigate to the project directory
 3. Open `index.html` in any modern web browser
 
-### Folder Structure
+### Enhanced Folder Structure
 ```
 Mips_Project_01/
-├── index.html                    # Main entry point with navigation
-├── simulator.html                # Interactive pipeline visualization
-├── hazard.html                   # Hazard detection and analysis
+├── index.html                    # Home page with dynamic VS Code simulation
+├── simulator.html                # Interactive pipeline visualization with code input
+├── hazard.html                   # Comprehensive hazard detection and analysis
 ├── overview.html                 # Documentation and MIPS concepts
 ├── README.md                     # Project documentation
+├── FINAL_VERIFICATION_REPORT.md  # Comprehensive verification report
 ├── styles.css                    # Core styling
 ├── styles-multi-enhanced.css     # Enhanced styling with premium effects
 ├── pipeline-simulator.js         # Pipeline simulation engine
-├── navigation.js                 # Multi-page navigation system
+├── navigation.js                 # Multi-page navigation system with hamburger menu
 ├── data/
 │   └── program.js                # MIPS instruction data
 └── Project-Resources/
@@ -140,19 +164,22 @@ let simulationState = {
 ### Enhanced Features
 
 #### New 4-Page Architecture
-- **Home Page (`index.html`)**: Features dynamic VS Code screen simulation with automatic code typing effect and collapsible project overview modules
-- **Simulator Page (`simulator.html`)**: Enhanced with user input area for custom MIPS code, improved control panel, and real-time pipeline visualization
-- **Hazard Detection Page (`hazard.html`)**: Comprehensive hazard analysis with detection, visualization, and correction techniques
-- **Overview Page (`overview.html`)**: Detailed project documentation and architecture overview
+- **Home Page (`index.html`)**: Features dynamic VS Code screen simulation with automatic code typing effect, collapsible project overview modules, and immersive learning experience
+- **Simulator Page (`simulator.html`)**: Enhanced with user input area for custom MIPS code, improved control panel, real-time pipeline visualization, and performance metrics
+- **Hazard Detection Page (`hazard.html`)**: Comprehensive hazard analysis with detection, visualization, correction techniques, and detailed explanations
+- **Overview Page (`overview.html`)**: Detailed project documentation and architecture overview with consistent navigation
 
 #### Key Enhancements
-1. **Dynamic VS Code Screen**: Real-time code visualization with typing effect
+1. **Dynamic VS Code Screen**: Real-time code visualization with typing effect and syntax highlighting
 2. **Collapsible Modules**: Expandable/collapsible sections for better information organization
-3. **Custom Code Input**: Users can input their own MIPS code for simulation
-4. **Enhanced Navigation**: Mobile-responsive hamburger menu for all devices
-5. **Consistent Control Panels**: Unified control interface across all pages
-6. **Performance Optimizations**: Hardware-accelerated animations and reduced-motion support
-7. **Accessibility Features**: High contrast mode and reduced motion support
+3. **Custom Code Input**: Users can input their own MIPS code for simulation and analysis
+4. **Enhanced Navigation**: Mobile-responsive hamburger menu for all devices with active link highlighting
+5. **Consistent Control Panels**: Unified control interface across all pages with Start, Pause, Step, Reset functionality
+6. **Performance Optimizations**: Hardware-accelerated animations, reduced-motion support, and accessibility features
+7. **Accessibility Features**: High contrast mode, reduced motion support, and keyboard navigation
+8. **Mobile-Responsive Design**: Fully responsive layout for all screen sizes with touch-friendly controls
+9. **Comprehensive Hazard Analysis**: Detailed hazard detection, classification, and correction techniques
+10. **Visual Enhancements**: Premium animations, gradients, and interactive effects throughout
 
 #### Visualization System
 - **IF Stage**: Blue (#00d9ff) - Instruction Fetch
@@ -160,9 +187,10 @@ let simulationState = {
 - **EX Stage**: Pink (#ff006e) - Execute
 - **MEM Stage**: Orange (#ffa500) - Memory Access
 - **WB Stage**: Green (#00ff44) - Write Back
-- **RAW Hazards**: Red highlighting
-- **Control Hazards**: Yellow highlighting
-- **Stalls**: Dark red highlighting
+- **RAW Hazards**: Red highlighting with pulsing animation
+- **Control Hazards**: Yellow highlighting with visual indicators
+- **Stalls**: Dark red highlighting with warning effects
+- **Forwarding**: Green highlighting with directional arrows
 
 ## 11️⃣ Testing and Results
 
@@ -173,8 +201,15 @@ let simulationState = {
 4. **User Interface**: Cross-browser compatibility with theme toggle
 5. **Visual Enhancements**: All animations, gradients, and hover effects
 6. **Responsive Design**: Mobile and desktop compatibility
-7. **3-Page Navigation**: Seamless page transitions
+7. **4-Page Navigation**: Seamless page transitions with hamburger menu
 8. **VS Code Integration**: Live Server launch functionality
+9. **Dynamic VS Code Screen**: Code typing animation with syntax highlighting
+10. **Collapsible Modules**: Expand/collapse functionality with smooth transitions
+11. **Custom Code Input**: MIPS parser functionality with error handling
+12. **Hazard Analysis Page**: Comprehensive hazard detection and correction
+13. **Mobile Responsiveness**: Hamburger menu and touch-friendly controls
+14. **Accessibility**: High contrast mode and reduced motion support
+15. **Performance Optimizations**: Hardware acceleration and smooth animations
 
 ### Expected vs Actual Results
 | Metric | Expected | Actual | Status |
@@ -187,7 +222,14 @@ let simulationState = {
 | Visual Enhancements | Beautiful animations and effects | All enhancements implemented | ✅ |
 | Theme Toggle | Dark/Light mode functionality | Working with persistent storage | ✅ |
 | VS Code Launch | Live Server compatibility | Working with right-click → "Open with Live Server" | ✅ |
-| 3-Page Navigation | Seamless page transitions | Working with active link highlighting | ✅ |
+| 4-Page Navigation | Seamless page transitions | Working with active link highlighting and hamburger menu | ✅ |
+| Dynamic VS Code Screen | Code typing animation | Working with syntax highlighting and typing effect | ✅ |
+| Collapsible Modules | Expand/collapse functionality | Working with smooth transitions | ✅ |
+| Custom Code Input | MIPS parsing with error handling | Working with validation and feedback | ✅ |
+| Hazard Analysis | Comprehensive hazard detection | Working with detailed explanations | ✅ |
+| Mobile Navigation | Hamburger menu functionality | Working with touch-friendly controls | ✅ |
+| Accessibility | High contrast and reduced motion | Working with proper support | ✅ |
+| Performance | Smooth animations and transitions | Optimized with hardware acceleration | ✅ |
 
 ### Performance Analysis
 - **Non-Pipelined**: 5 cycles per instruction
@@ -195,17 +237,23 @@ let simulationState = {
 - **Speedup**: 2.5-4.2x improvement
 - **Throughput**: 5x improvement in instruction completion rate
 - **Visual Performance**: Smooth animations and transitions optimized for all devices
+- **Load Time**: Fast loading with optimized assets
+- **Accessibility**: Full support for reduced motion and high contrast modes
 
 ## 12️⃣ Discussion / Analysis
 
 ### Results Explanation
-The simulation successfully demonstrates pipeline efficiency improvements and hazard effects with enhanced visual feedback. The beautiful visualizations clearly show how RAW hazards create stalls, reducing pipeline efficiency from the theoretical maximum. All enhancements provide superior educational value through stunning visual representations.
+The simulation successfully demonstrates pipeline efficiency improvements and hazard effects with enhanced visual feedback. The beautiful visualizations clearly show how RAW hazards create stalls, reducing pipeline efficiency from the theoretical maximum. The enhanced 4-page architecture with dynamic VS Code screen simulation, collapsible modules, and custom code input provide superior educational value through stunning visual representations and personalized learning experiences.
 
 ### Challenges Faced
 - Implementing accurate hazard detection algorithms with visual feedback
 - Creating smooth, real-time visualizations with enhanced animations
 - Balancing educational content with premium user interface design
 - Integrating all components into a cohesive single entity
+- Implementing dynamic VS Code screen simulation with typing effects
+- Creating comprehensive hazard analysis page with correction techniques
+- Developing responsive navigation with hamburger menu for mobile devices
+- Optimizing performance with hardware acceleration and accessibility features
 
 ### Achievements
 - **Visual Enhancement**: Stunning animations, gradients, and interactive effects
@@ -214,6 +262,12 @@ The simulation successfully demonstrates pipeline efficiency improvements and ha
 - **Theme System**: Persistent dark/light mode functionality
 - **Responsive Design**: Beautiful on all device sizes
 - **Performance**: Smooth animations optimized for educational use
+- **Dynamic Simulation**: VS Code screen with automatic typing animation
+- **Interactive Learning**: Collapsible modules for organized information
+- **Custom Code Support**: User input for personalized MIPS programs
+- **Comprehensive Analysis**: Dedicated hazard detection and correction page
+- **Mobile Accessibility**: Responsive design with hamburger navigation
+- **Enhanced UX**: Premium interface with accessibility features
 
 ### Limitations
 - Simplified MIPS instruction set for educational purposes
@@ -225,7 +279,7 @@ The web-based simulation performs efficiently with real-time updates and smooth 
 
 ## 13️⃣ Conclusion
 
-This project successfully achieves its objectives by providing an interactive, web-based simulation of a 5-stage RISC pipeline processor with stunning visual enhancements. The implementation demonstrates core pipeline concepts including instruction flow, hazard detection, and performance metrics with beautiful visual feedback. Students can visualize abstract concepts in real-time with enhanced visual representations, significantly enhancing their understanding of computer architecture. The project fills a gap in educational tools by providing a simple, accessible simulation without complex setup requirements, featuring a premium user experience with smooth animations and interactive elements. The results confirm the effectiveness of visual learning tools in computer architecture education. The system is fully integrated as a cohesive single entity with seamless VS Code Live Server compatibility and responsive design across all devices.
+This project successfully achieves its objectives by providing an interactive, web-based simulation of a 5-stage RISC pipeline processor with stunning visual enhancements and comprehensive educational features. The implementation demonstrates core pipeline concepts including instruction flow, hazard detection, and performance metrics with beautiful visual feedback. Students can visualize abstract concepts in real-time with enhanced visual representations, significantly enhancing their understanding of computer architecture. The enhanced 4-page architecture with dynamic VS Code screen simulation, collapsible modules, custom code input, and comprehensive hazard analysis provides a complete learning environment. The project fills a gap in educational tools by providing a simple, accessible simulation without complex setup requirements, featuring a premium user experience with smooth animations, interactive elements, and mobile-responsive design. The results confirm the effectiveness of visual learning tools in computer architecture education. The system is fully integrated as a cohesive single entity with seamless VS Code Live Server compatibility and responsive design across all devices.
 
 ## 14️⃣ Future Work
 
@@ -235,6 +289,11 @@ This project successfully achieves its objectives by providing an interactive, w
 - Multi-core pipeline visualization
 - Custom instruction set support
 - Advanced animation effects and visualizations
+- Enhanced VS Code simulation with more realistic IDE features
+- Advanced MIPS instruction set with floating-point operations
+- Performance comparison tools between different pipeline configurations
+- Export functionality for simulation results and analysis
+- Collaborative features for classroom use
 
 ### Hybrid Model Integration
 - Integration with AI-assisted code generation
@@ -333,6 +392,7 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 - **VS Code Launch**: Right-click `index.html` → "Open with Live Server" or use built-in preview
 - **Browser Compatibility**: Works in Chrome, Firefox, Safari, Edge
 - **No Build Required**: Pure HTML/CSS/JS - runs directly in browser
+- **4-Page Navigation**: Access all features through intuitive navigation
 
 🎯 **"LIVE SIMULATION" means:**
 - Instructions processed dynamically through JavaScript
@@ -340,6 +400,9 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 - Hazards, forwarding, stalls visualized
 - UI reacts instantly to user input
 - **All client-side** - no backend required
+- **Dynamic VS Code Screen**: Automatic code typing simulation
+- **Custom Code Input**: User can input their own MIPS programs
+- **Comprehensive Hazard Analysis**: Detailed detection and correction
 
 #### 🥇 **METHOD 1 — VS Code Live Server (BEST for demos & viva)**
 - **Status**: ✅ **ALREADY WORKING**
@@ -357,12 +420,16 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 - **GitHub Pages**: https://muhammad-junaid-sajjad.github.io/Mips_Project_01/
 - **Pure HTML/CSS/JS**: No backend dependencies
 - **Always Accessible**: Client-side simulation runs in any browser
+- **4-Page Architecture**: Full access to all features and analysis tools
 
 #### 📋 **Technical Reality:**
 - **Client-side only**: No Python, Node, Flask, or FastAPI needed
 - **Deterministic logic**: Pipeline simulation runs in JavaScript
 - **No build tools**: Pure static files, works offline
 - **Educational focus**: Visual learning through real-time simulation
+- **Enhanced UX**: Dynamic VS Code simulation, collapsible modules, custom code input
+- **Mobile Responsive**: Hamburger menu and touch-friendly controls
+- **Accessibility**: High contrast mode and reduced motion support
 
 ### 📁 **Complete Project Structure**
 ```
@@ -403,19 +470,27 @@ Mips_Project_01/
 
 ### 🎯 **Educational Value & Features**
 - **5-Stage Pipeline Visualization**: IF → ID → EX → MEM → WB
-- **Hazard Detection**: RAW hazards with visual indicators
-- **Performance Metrics**: CPI, speedup, stall analysis
-- **Interactive Controls**: Start, Step, Reset functionality
+- **Hazard Detection**: RAW, Control, and Structural hazards with visual indicators
+- **Performance Metrics**: CPI, speedup, stall analysis, and detailed statistics
+- **Interactive Controls**: Start, Pause, Step, Reset functionality
 - **Responsive Design**: Works on all device sizes
 - **Premium UI/UX**: Professional dark/light themes
 - **Academic Documentation**: Comprehensive educational materials
 - **Real-time Feedback**: Immediate visualization of pipeline operations
+- **Dynamic VS Code Simulation**: Automatic code typing animation
+- **Custom Code Input**: User can enter their own MIPS programs
+- **Comprehensive Hazard Analysis**: Detailed detection and correction techniques
+- **Collapsible Modules**: Organized information presentation
+- **4-Page Architecture**: Dedicated pages for simulation, hazards, and overview
+- **Mobile Navigation**: Hamburger menu for mobile devices
+- **Accessibility Features**: High contrast mode and reduced motion support
+- **Performance Optimizations**: Hardware acceleration and smooth animations
 
 ---
 
 ## 🌟 Elite-Level Project Highlights
 
-**The Interactive 5-Stage Pipelined RISC Processor Simulation** represents a complete, professional-grade educational tool that bridges the gap between theoretical computer architecture concepts and practical visualization. With its innovative three-page interface, real-time hazard detection, stunning visual enhancements, and comprehensive documentation, it provides students and educators with an invaluable resource for understanding pipeline processor operation.
+**The Interactive 5-Stage Pipelined RISC Processor Simulation** represents a complete, professional-grade educational tool that bridges the gap between theoretical computer architecture concepts and practical visualization. With its innovative four-page interface, real-time hazard detection, stunning visual enhancements, and comprehensive documentation, it provides students and educators with an invaluable resource for understanding pipeline processor operation.
 
 The project features:
 - **Premium Visual Design**: Beautiful gradients, animations, and interactive elements
@@ -426,6 +501,14 @@ The project features:
 - **VS Code Integration**: Seamless launch via Live Server
 - **System Integration**: All components work as a cohesive single entity
 - **Performance Optimized**: Smooth animations while maintaining efficiency
+- **Dynamic VS Code Simulation**: Real-time code typing with syntax highlighting
+- **4-Page Architecture**: Home, Simulator, Hazard Analysis, and Overview pages
+- **Custom Code Input**: Users can enter and simulate their own MIPS programs
+- **Comprehensive Hazard Analysis**: Detailed detection and correction techniques
+- **Collapsible Modules**: Organized information presentation
+- **Mobile Navigation**: Hamburger menu for mobile devices
+- **Accessibility Features**: High contrast mode and reduced motion support
+- **Enhanced User Experience**: Intuitive controls and responsive feedback
 
 **Ready for:** Educational use, GitHub Pages deployment, and professional evaluation.
 
