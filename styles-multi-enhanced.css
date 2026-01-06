@@ -718,3 +718,411 @@ code {
 .glow-accent {
   filter: drop-shadow(0 0 10px rgba(255, 0, 110, 0.6));
 }
+
+/* === VS Code Screen Simulation === */
+.vscode-screen {
+  width: 90%;
+  max-width: 800px;
+  margin: 40px auto;
+  background: var(--card-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 217, 255, 0.2);
+  border: 1px solid var(--border);
+  position: relative;
+  animation: float 8s ease-in-out infinite;
+}
+
+.vscode-header {
+  background: linear-gradient(90deg, #007acc, #005a9e);
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.vscode-controls {
+  display: flex;
+  gap: 8px;
+  margin-right: 12px;
+}
+
+.control-btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.control-btn.close {
+  background: #ff5f57;
+}
+
+.control-btn.minimize {
+  background: #ffbd2e;
+}
+
+.control-btn.maximize {
+  background: #28c940;
+}
+
+.vscode-title {
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+  flex-grow: 1;
+  text-align: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.vscode-content {
+  display: flex;
+  background: #1e1e1e;
+  min-height: 300px;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #d4d4d4;
+}
+
+.line-numbers {
+  background: #232323;
+  padding: 20px 8px;
+  text-align: right;
+  border-right: 1px solid var(--border);
+  user-select: none;
+  min-width: 40px;
+}
+
+.line-number {
+  color: #858585;
+  font-size: 0.9em;
+  line-height: 1.6;
+}
+
+.code-content {
+  flex-grow: 1;
+  padding: 20px;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.code-line {
+  margin: 2px 0;
+  padding-left: 10px;
+  border-left: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.code-line:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-left-color: var(--primary);
+}
+
+.comment {
+  color: #6a9955;
+}
+
+.directive {
+  color: #569cd6;
+}
+
+.keyword {
+  color: #c586c0;
+}
+
+.op {
+  color: #d4d4d4;
+  font-weight: bold;
+}
+
+.reg {
+  color: #9cdcfe;
+}
+
+.num {
+  color: #b5cea8;
+}
+
+/* === Collapsible Modules === */
+.collapsible-module {
+  background: linear-gradient(135deg, var(--card-bg) 0%, var(--bg-lighter) 100%);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin: 15px 0;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.module-header {
+  padding: 20px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  color: var(--bg);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.module-header:hover {
+  background: linear-gradient(90deg, var(--primary-dark), #ff006e);
+}
+
+.module-header::after {
+  content: '▼';
+  transition: transform 0.3s ease;
+  font-size: 0.8rem;
+}
+
+.module-header.active::after {
+  transform: rotate(180deg);
+}
+
+.module-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+  background: var(--card-bg);
+  color: var(--text);
+}
+
+.module-content.active {
+  max-height: 1000px;
+  padding: 20px;
+}
+
+.module-content p {
+  margin-bottom: 15px;
+  line-height: 1.7;
+}
+
+/* === Pipeline Flow Visualization === */
+.pipeline-flow {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 40px 0;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.pipeline-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 120px;
+}
+
+.stage-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  animation: pulse 2s infinite;
+}
+
+.stage-icon:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+}
+
+.stage-icon.if { background: linear-gradient(135deg, var(--stage-if), #0099cc); }
+.stage-icon.id { background: linear-gradient(135deg, var(--stage-id), #6d28d9); }
+.stage-icon.ex { background: linear-gradient(135deg, var(--stage-ex), #cc005a); }
+.stage-icon.mem { background: linear-gradient(135deg, var(--stage-mem), #cc8400); }
+.stage-icon.wb { background: linear-gradient(135deg, var(--stage-wb), #00cc33); }
+
+.stage-label {
+  font-weight: 700;
+  color: var(--text);
+  text-align: center;
+}
+
+.flow-arrow {
+  font-size: 2rem;
+  color: var(--text-tertiary);
+  animation: arrow-pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes arrow-pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* === Control Buttons === */
+.control-panel {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 30px 0;
+  flex-wrap: wrap;
+}
+
+.control-btn-large {
+  padding: 15px 30px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 1rem;
+  border: 2px solid;
+  min-width: 120px;
+}
+
+/* === Performance Optimizations === */
+/* Use hardware acceleration for animations */
+.stage-instruction,
+.stage-box,
+.code-line,
+.module-header,
+.module-content,
+.control-btn-large {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Optimize for smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Optimize images and elements */
+img, svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Optimized animations */
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Performance optimized hover effects */
+.card:hover,
+.feature-card:hover,
+.nav-link:hover,
+.btn:hover,
+.stage-box:hover {
+  will-change: transform;
+}
+
+/* === Responsive Design for VS Code Screen === */
+@media (max-width: 768px) {
+  .vscode-screen {
+    width: 95%;
+    margin: 20px auto;
+  }
+
+  .vscode-content {
+    font-size: 12px;
+  }
+
+  .pipeline-flow {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .flow-arrow {
+    transform: rotate(90deg);
+  }
+
+  /* Optimize for mobile */
+  .nav-menu {
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: var(--nav-bg);
+    padding: 20px 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    display: none;
+  }
+
+  .nav-menu.active {
+    display: flex;
+  }
+
+  .hamburger {
+    display: block;
+    cursor: pointer;
+    z-index: 1001;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px 0;
+    background: var(--primary);
+    transition: 0.3s;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --border: #ffffff;
+    --text: #ffffff;
+    --text-secondary: #ffffff;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .pipeline-diagram,
+  .stage-instruction,
+  .arrow {
+    animation: none !important;
+  }
+}

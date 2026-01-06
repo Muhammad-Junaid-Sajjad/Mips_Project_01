@@ -521,14 +521,41 @@ function initEventListeners() {
   const pauseBtn = document.getElementById('pauseBtn');
   const stepBtn = document.getElementById('stepBtn');
   const resetBtn = document.getElementById('resetBtn');
+  const loadCodeBtn = document.getElementById('load-code-btn');
 
   if (startBtn) startBtn.addEventListener('click', startSimulation);
   if (pauseBtn) pauseBtn.addEventListener('click', pauseSimulation);
   if (stepBtn) stepBtn.addEventListener('click', stepSimulation);
   if (resetBtn) resetBtn.addEventListener('click', resetSimulation);
+  if (loadCodeBtn) loadCodeBtn.addEventListener('click', loadCustomCode);
 
   // Initialize instruction list
   updateInstructionList();
+}
+
+/**
+ * Load custom MIPS code from the input textarea
+ */
+function loadCustomCode() {
+  const codeInput = document.getElementById('mips-code-input');
+  if (codeInput) {
+    const customCode = codeInput.value;
+    if (customCode.trim()) {
+      const success = window.loadCustomInstructions(customCode);
+      if (success) {
+        console.log('Successfully loaded custom MIPS code');
+        // Update UI to reflect new program
+        updateInstructionList();
+        updateTimelineTable();
+        // Reset simulation with new instructions
+        resetSimulation();
+      } else {
+        alert('Failed to parse the MIPS code. Please check the syntax and try again.');
+      }
+    } else {
+      alert('Please enter some MIPS code to load.');
+    }
+  }
 }
 
 // Initialize when DOM is ready

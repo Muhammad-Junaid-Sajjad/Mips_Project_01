@@ -11,9 +11,15 @@
   <nav class="navbar">
     <div class="nav-container">
       <div class="nav-logo">🔄 MIPS Pipeline</div>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
       <ul class="nav-menu">
         <li><a href="index.html" class="nav-link">Home</a></li>
         <li><a href="simulator.html" class="nav-link">Simulator</a></li>
+        <li><a href="hazard.html" class="nav-link">Hazards</a></li>
         <li><a href="overview.html" class="nav-link active">Overview</a></li>
         <li><button id="theme-toggle" class="theme-toggle" title="Switch to Light Mode">🌙</button></li>
       </ul>
@@ -153,6 +159,13 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- Control Panel for Consistency -->
+  <div class="control-panel" style="margin: 40px 0;">
+    <button class="control-btn-large btn-primary" onclick="location.href='simulator.html'">▶ Start Simulation</button>
+    <button class="control-btn-large btn-secondary" onclick="location.href='hazard.html'">⚠️ Hazard Analysis</button>
+    <button class="control-btn-large btn-accent">📊 Performance</button>
   </div>
 
   <footer class="footer">

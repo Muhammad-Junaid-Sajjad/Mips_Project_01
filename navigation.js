@@ -25,8 +25,10 @@ document.addEventListener('DOMContentLoaded', function() {
   const navLinks = document.querySelectorAll('.nav-link');
 
   navLinks.forEach(link => {
-    if (link.getAttribute('href') === currentPage ||
-        (currentPage === '' && link.getAttribute('href') === 'index.html')) {
+    const href = link.getAttribute('href');
+    if (href && (href === currentPage ||
+        (currentPage === '' && href === 'index.html') ||
+        (currentPage === 'index' && href === 'index.html'))) {
       link.classList.add('active');
     } else {
       link.classList.remove('active');

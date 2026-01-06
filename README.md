@@ -101,6 +101,7 @@ The project is a static web application requiring no build tools or special setu
 Mips_Project_01/
 ├── index.html                    # Main entry point with navigation
 ├── simulator.html                # Interactive pipeline visualization
+├── hazard.html                   # Hazard detection and analysis
 ├── overview.html                 # Documentation and MIPS concepts
 ├── README.md                     # Project documentation
 ├── styles.css                    # Core styling
@@ -135,6 +136,23 @@ let simulationState = {
   stallCounter: 0
 };
 ```
+
+### Enhanced Features
+
+#### New 4-Page Architecture
+- **Home Page (`index.html`)**: Features dynamic VS Code screen simulation with automatic code typing effect and collapsible project overview modules
+- **Simulator Page (`simulator.html`)**: Enhanced with user input area for custom MIPS code, improved control panel, and real-time pipeline visualization
+- **Hazard Detection Page (`hazard.html`)**: Comprehensive hazard analysis with detection, visualization, and correction techniques
+- **Overview Page (`overview.html`)**: Detailed project documentation and architecture overview
+
+#### Key Enhancements
+1. **Dynamic VS Code Screen**: Real-time code visualization with typing effect
+2. **Collapsible Modules**: Expandable/collapsible sections for better information organization
+3. **Custom Code Input**: Users can input their own MIPS code for simulation
+4. **Enhanced Navigation**: Mobile-responsive hamburger menu for all devices
+5. **Consistent Control Panels**: Unified control interface across all pages
+6. **Performance Optimizations**: Hardware-accelerated animations and reduced-motion support
+7. **Accessibility Features**: High contrast mode and reduced motion support
 
 #### Visualization System
 - **IF Stage**: Blue (#00d9ff) - Instruction Fetch

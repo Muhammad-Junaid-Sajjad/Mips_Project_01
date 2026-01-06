@@ -12,16 +12,22 @@
   <nav class="navbar">
     <div class="nav-container">
       <div class="nav-logo">🔧 Pipeline Simulator</div>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
       <ul class="nav-menu">
         <li><a href="index.html" class="nav-link active">Home</a></li>
         <li><a href="simulator.html" class="nav-link">Simulator</a></li>
+        <li><a href="hazard.html" class="nav-link">Hazards</a></li>
         <li><a href="overview.html" class="nav-link">Overview</a></li>
         <li><button id="theme-toggle" class="theme-toggle" title="Switch to Dark Mode">🌙</button></li>
       </ul>
     </div>
   </nav>
 
-  <!-- Hero Section with Glowing Title -->
+  <!-- Hero Section with Dynamic VS Code Screen -->
   <section class="hero">
     <div class="hero-content">
       <h1 class="glowing-title">
@@ -31,58 +37,144 @@
       </h1>
       <p class="hero-subtitle">Visualize instruction execution through the pipeline with real-time hazard detection</p>
       <div class="hero-buttons">
-        <a href="pipeline.html" class="btn btn-primary">🚀 Start Simulation</a>
+        <a href="simulator.html" class="btn btn-primary">🚀 Start Simulation</a>
         <a href="#features" class="btn btn-secondary">📚 Learn More</a>
       </div>
     </div>
-    <div class="hero-background">
-      <div class="pipeline-preview">
-        <div class="stage-box">IF</div>
-        <div class="arrow">→</div>
-        <div class="stage-box">ID</div>
-        <div class="arrow">→</div>
-        <div class="stage-box">EX</div>
-        <div class="arrow">→</div>
-        <div class="stage-box">MEM</div>
-        <div class="arrow">→</div>
-        <div class="stage-box">WB</div>
+
+    <!-- Dynamic VS Code Screen Simulation -->
+    <div class="vscode-screen">
+      <div class="vscode-header">
+        <div class="vscode-controls">
+          <div class="control-btn close"></div>
+          <div class="control-btn minimize"></div>
+          <div class="control-btn maximize"></div>
+        </div>
+        <div class="vscode-title">program.s - MIPS Pipeline Simulator</div>
+      </div>
+      <div class="vscode-content">
+        <div class="line-numbers">
+          <div class="line-number">1</div>
+          <div class="line-number">2</div>
+          <div class="line-number">3</div>
+          <div class="line-number">4</div>
+          <div class="line-number">5</div>
+          <div class="line-number">6</div>
+          <div class="line-number">7</div>
+          <div class="line-number">8</div>
+          <div class="line-number">9</div>
+          <div class="line-number">10</div>
+        </div>
+        <div class="code-content">
+          <div class="code-line" id="code-line-1"><span class="comment"># MIPS Pipeline Simulation Program</span></div>
+          <div class="code-line" id="code-line-2"><span class="directive">.data</span></div>
+          <div class="code-line" id="code-line-3"><span class="comment"># Data section for simulation</span></div>
+          <div class="code-line" id="code-line-4"><span class="directive">.text</span></div>
+          <div class="code-line" id="code-line-5"><span class="keyword">main:</span></div>
+          <div class="code-line" id="code-line-6"><span class="op">LW</span>   <span class="reg">R1</span>, <span class="num">0</span>(<span class="reg">R0</span>)        <span class="comment"># Load value into R1</span></div>
+          <div class="code-line" id="code-line-7"><span class="op">LW</span>   <span class="reg">R2</span>, <span class="num">4</span>(<span class="reg">R0</span>)        <span class="comment"># Load value into R2</span></div>
+          <div class="code-line" id="code-line-8"><span class="op">ADD</span>  <span class="reg">R3</span>, <span class="reg">R1</span>, <span class="reg">R2</span>       <span class="comment"># R3 = R1 + R2 (RAW hazard)</span></div>
+          <div class="code-line" id="code-line-9"><span class="op">SUB</span>  <span class="reg">R4</span>, <span class="reg">R3</span>, <span class="reg">R1</span>       <span class="comment"># R4 = R3 - R1 (RAW hazard)</span></div>
+          <div class="code-line" id="code-line-10"><span class="op">SW</span>   <span class="reg">R4</span>, <span class="num">8</span>(<span class="reg">R0</span>)        <span class="comment"># Store R4 to memory</span></div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Features Section -->
+  <!-- Control Panel for Consistency -->
+  <div class="control-panel" style="margin: 40px 0;">
+    <button class="control-btn-large btn-primary" onclick="location.href='simulator.html'">▶ Start Simulation</button>
+    <button class="control-btn-large btn-secondary">📊 Performance</button>
+    <button class="control-btn-large btn-accent" onclick="location.href='hazard.html'">⚠️ Hazard Analysis</button>
+  </div>
+
+  <!-- Features Section with Collapsible Modules -->
   <section id="features" class="features">
     <h2>Key Features</h2>
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon">🔬</div>
-        <h3>Pipeline Simulation</h3>
+
+    <div class="collapsible-module">
+      <div class="module-header" onclick="toggleModule(this)">
+        <span>🔬 Pipeline Simulation</span>
+      </div>
+      <div class="module-content">
         <p>Real-time 5-stage pipeline visualization with cycle-by-cycle execution</p>
+        <p>Watch as instructions flow through the five pipeline stages: Instruction Fetch (IF), Instruction Decode (ID), Execute (EX), Memory Access (MEM), and Write Back (WB).</p>
+        <div class="pipeline-flow">
+          <div class="pipeline-stage">
+            <div class="stage-icon if">IF</div>
+            <div class="stage-label">Instruction Fetch</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="pipeline-stage">
+            <div class="stage-icon id">ID</div>
+            <div class="stage-label">Instruction Decode</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="pipeline-stage">
+            <div class="stage-icon ex">EX</div>
+            <div class="stage-label">Execute</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="pipeline-stage">
+            <div class="stage-icon mem">MEM</div>
+            <div class="stage-label">Memory Access</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="pipeline-stage">
+            <div class="stage-icon wb">WB</div>
+            <div class="stage-label">Write Back</div>
+          </div>
+        </div>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">⚠️</div>
-        <h3>Hazard Detection</h3>
+    </div>
+
+    <div class="collapsible-module">
+      <div class="module-header" onclick="toggleModule(this)">
+        <span>⚠️ Hazard Detection</span>
+      </div>
+      <div class="module-content">
         <p>Automatic detection of RAW, Control hazards with forwarding analysis</p>
+        <p>Identify and visualize data hazards (RAW - Read After Write), control hazards from branches, and structural hazards in the pipeline.</p>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">📊</div>
-        <h3>Performance Metrics</h3>
+    </div>
+
+    <div class="collapsible-module">
+      <div class="module-header" onclick="toggleModule(this)">
+        <span>📊 Performance Metrics</span>
+      </div>
+      <div class="module-content">
         <p>Track CPI, speedup, stalls, and detailed performance analysis</p>
+        <p>Monitor Cycles Per Instruction (CPI), speedup ratios, stall counts, and other key performance indicators to understand pipeline efficiency.</p>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">⌨️</div>
-        <h3>Code Sandbox</h3>
+    </div>
+
+    <div class="collapsible-module">
+      <div class="module-header" onclick="toggleModule(this)">
+        <span>⌨️ Code Sandbox</span>
+      </div>
+      <div class="module-content">
         <p>Write custom MIPS programs and run them live in the simulator</p>
+        <p>Create and test your own MIPS assembly programs with real-time simulation feedback.</p>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">📤</div>
-        <h3>Export Results</h3>
+    </div>
+
+    <div class="collapsible-module">
+      <div class="module-header" onclick="toggleModule(this)">
+        <span>📤 Export Results</span>
+      </div>
+      <div class="module-content">
         <p>Export execution logs as JSON, CSV, or generate professional reports</p>
+        <p>Save and share your simulation results in multiple formats for analysis and documentation.</p>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">✨</div>
-        <h3>Interactive UI</h3>
+    </div>
+
+    <div class="collapsible-module">
+      <div class="module-header" onclick="toggleModule(this)">
+        <span>✨ Interactive UI</span>
+      </div>
+      <div class="module-content">
         <p>Smooth animations, responsive design, and excellent user experience</p>
+        <p>Enjoy a premium interface with beautiful animations, theme toggling, and responsive design across all devices.</p>
       </div>
     </div>
   </section>
@@ -308,5 +400,46 @@ BEQ R4, R5, LOOP</code></pre>
   </footer>
 
   <script src="navigation.js"></script>
+
+  <script>
+    // Function to toggle collapsible modules
+    function toggleModule(header) {
+      const content = header.nextElementSibling;
+      const isActive = header.classList.contains('active');
+
+      // Close all other modules
+      document.querySelectorAll('.module-header').forEach(h => {
+        h.classList.remove('active');
+        h.nextElementSibling.classList.remove('active');
+      });
+
+      // Toggle the clicked module
+      if (!isActive) {
+        header.classList.add('active');
+        content.classList.add('active');
+      }
+    }
+
+    // Add animation to VS Code screen code lines for typing effect
+    document.addEventListener('DOMContentLoaded', function() {
+      const codeLines = document.querySelectorAll('.code-line');
+      let delay = 0;
+
+      codeLines.forEach((line, index) => {
+        setTimeout(() => {
+          line.style.opacity = '0';
+          line.style.transform = 'translateX(-20px)';
+
+          setTimeout(() => {
+            line.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            line.style.opacity = '1';
+            line.style.transform = 'translateX(0)';
+          }, 50);
+        }, delay);
+
+        delay += 300; // Delay between each line
+      });
+    });
+  </script>
 </body>
 </html>

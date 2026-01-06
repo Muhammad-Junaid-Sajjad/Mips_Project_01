@@ -378,9 +378,15 @@
   <nav class="navbar">
     <div class="nav-container">
       <div class="nav-logo">🔄 MIPS Pipeline</div>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
       <ul class="nav-menu">
         <li><a href="index.html" class="nav-link">Home</a></li>
         <li><a href="simulator.html" class="nav-link active">Simulator</a></li>
+        <li><a href="hazard.html" class="nav-link">Hazards</a></li>
         <li><a href="overview.html" class="nav-link">Overview</a></li>
         <li><button id="theme-toggle" class="theme-toggle" title="Switch to Light Mode">🌙</button></li>
       </ul>
@@ -393,6 +399,30 @@
       <p class="subtitle">Instruction Fetch → Decode → Execute → Memory → Write-Back</p>
     </header>
 
+    <!-- User Input Section -->
+    <section class="card" style="margin-bottom: 40px;">
+      <h2 style="margin-bottom: 20px;">MIPS Code Input</h2>
+      <div class="code-input-container">
+        <textarea id="mips-code-input" placeholder="Enter your MIPS code here...
+Example:
+LW R1, 0(R0)
+LW R2, 4(R0)
+ADD R3, R1, R2
+SUB R4, R3, R1
+SW R4, 8(R0)
+BEQ R4, R0, LABEL" style="width: 100%; height: 150px; padding: 15px; border-radius: 8px; background: var(--card-bg); color: var(--text); border: 1px solid var(--border); font-family: monospace; margin-bottom: 15px;">LW   R1, 0(R0)        # Load value from memory address 0 into R1
+LW   R2, 4(R0)        # Load value from memory address 4 into R2
+ADD  R3, R1, R2       # R3 = R1 + R2 (creates RAW hazard with instruction 1 & 2)
+SUB  R4, R3, R1       # R4 = R3 - R1 (creates RAW hazard with instruction 3)
+SW   R4, 8(R0)        # Store R4 value to memory address 8
+BEQ  R4, R0, LABEL    # Branch if R4 equals R0
+
+LABEL:
+# End of program</textarea>
+        <button id="load-code-btn" class="btn btn-primary" style="width: 100%;">Load Code</button>
+      </div>
+    </section>
+
     <div class="stats-panel">
       <div class="stat-card"><div class="stat-val" id="cycleText">0</div><div class="stat-lab">Current Cycle</div></div>
       <div class="stat-card"><div class="stat-val" id="cpi-pipelined">-</div><div class="stat-lab">CPI (Pipelined)</div></div>
@@ -401,10 +431,11 @@
     </div>
 
     <section class="card" style="margin-bottom: 40px;">
-      <div class="text-center" style="margin-bottom: 20px;">
-        <button id="startBtn" class="btn btn-primary">▶ Start</button>
-        <button id="stepBtn" class="btn btn-secondary">⏭ Step</button>
-        <button id="resetBtn" class="btn btn-accent">↻ Reset</button>
+      <div class="control-panel">
+        <button id="startBtn" class="control-btn-large btn-primary">▶ Start</button>
+        <button id="pauseBtn" class="control-btn-large btn-secondary">⏸ Pause</button>
+        <button id="stepBtn" class="control-btn-large btn-secondary">⏭ Step</button>
+        <button id="resetBtn" class="control-btn-large btn-accent">↻ Reset</button>
       </div>
 
       <div class="pipeline-diagram">
